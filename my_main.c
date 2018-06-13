@@ -118,10 +118,11 @@ struct vary_node ** second_pass() {
   int end;
   double sval;
   double eval;
-  double d;
+  double d, absd;
   char name[128];
   struct vary_node ** knobs = malloc(num_frames * sizeof(struct vary_node));
   int i;
+	double expmod = 0;
   
   for(i = 0; i < lastop; i++){
     if(op[i].opcode == VARY){
@@ -129,21 +130,34 @@ struct vary_node ** second_pass() {
       end = op[i].op.vary.end_frame;
       sval = op[i].op.vary.start_val;
       eval = op[i].op.vary.end_val;
-
+			expmod = op[i].op.vary.exponent;
+			
       strcpy(name, op[i].op.vary.p->name);
-      d = (eval - sval) / (end - start);
+      d = ((eval - sval) / (end - start));
+			absd = fabs(d);
       int j;
-
-      for(j = start; j <= end; j++){
-        struct vary_node * now = malloc(sizeof(struct vary_node));
-        strcpy(now->name, name);
-        now->value = sval + d * (j - start);
-        now->next = knobs[j];
-        knobs[j] = now;
-      }
+			
+			if(expmod){
+	      for(j = start; j <= end; j++){
+	        struct vary_node * now = malloc(sizeof(struct vary_node));
+	        strcpy(now->name, name);
+	        now->value = sval + d * (j - start) * (pow((absd * (j - start)), (expmod - 1)));
+	        now->next = knobs[j];
+	        knobs[j] = now;
+	      }
+			}
+			if(expmod == 0){
+      	for(j = start; j <= end; j++){
+					struct vary_node * now = malloc(sizeof(struct vary_node));
+      		strcpy(now->name, name);
+      		now->value = sval + d * (j - start);
+      		now->next = knobs[j];
+      		knobs[j] = now;
+      	}
+			}
     }
   }
-  //print_knobs(); i want to die ahhhh
+  //print_knobs();
   //print_knobs();
 
   return knobs;

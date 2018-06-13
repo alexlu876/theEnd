@@ -139,6 +139,7 @@ struct command
     struct {
       SYMTAB *p;
       double start_frame, end_frame, start_val, end_val;
+			double exponent;
     } vary;
     struct {
       SYMTAB *p;

@@ -820,6 +820,19 @@ VARY STRING DOUBLE DOUBLE DOUBLE DOUBLE
   lastop++;
 }|
 
+VARY STRING DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE
+{
+  lineno++;
+  op[lastop].opcode = VARY;
+  op[lastop].op.vary.p = add_symbol($2,SYM_STRING,0);
+  op[lastop].op.vary.start_frame = $3;
+  op[lastop].op.vary.end_frame = $4;
+  op[lastop].op.vary.start_val = $5;
+  op[lastop].op.vary.end_val = $6;
+	op[lastop].op.vary.exponent = $7;
+  lastop++;
+}|
+
 SHADING SHADING_TYPE
 {
   lineno++;
