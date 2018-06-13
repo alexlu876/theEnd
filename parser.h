@@ -64,6 +64,39 @@ struct command
     } box;
     struct {
       SYMTAB *constants;
+      double d0[4],d1[4],d2[4],d3[4];
+      SYMTAB *cs;
+    } tetrahedron;
+    struct {
+      SYMTAB *constants;
+      double d0[4],d1[4],d2[4];
+			double h;
+      SYMTAB *cs;
+    } triprism;
+    struct {
+      SYMTAB *constants;
+      double d[4];
+      double r;
+			double h;
+      SYMTAB *cs;
+    } cylinder;
+    struct {
+      SYMTAB *constants;
+      double d[4];
+      double r;
+			double h;
+      SYMTAB *cs;
+    } cone;
+    struct {
+      SYMTAB *constants;
+      double d[4];
+      double a;
+			double b;
+			double c;
+      SYMTAB *cs;
+    } ellipsoid;
+    struct {
+      SYMTAB *constants;
       double p0[4],p1[4];
       SYMTAB *cs0,*cs1;
     } line;

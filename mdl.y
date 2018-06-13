@@ -29,7 +29,7 @@
 %token <val> DOUBLE
 %token <string> LIGHT AMBIENT
 %token <string> CONSTANTS SAVE_COORDS CAMERA
-%token <string> SPHERE TORUS BOX LINE CS MESH TEXTURE
+%token <string> SPHERE TORUS BOX TETRAHEDRON CYLINDER CONE ELLIPSOID TRIPRISM LINE CS MESH TEXTURE
 %token <string> STRING
 %token <string> SET MOVE SCALE ROTATE BASENAME SAVE_KNOBS TWEEN FRAMES VARY
 %token <string> PUSH POP SAVE GENERATE_RAYFILES
@@ -237,6 +237,103 @@ BOX STRING DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE STRING
   m = (struct matrix *)new_matrix(4,4);
   op[lastop].op.box.cs = add_symbol($9,SYM_MATRIX,m);
 
+  lastop++;
+}|
+
+TETRAHEDRON DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE
+{
+  lineno++;
+  op[lastop].opcode = TETRAHEDRON;
+  op[lastop].op.tetrahedron.d0[0] = $2;
+  op[lastop].op.tetrahedron.d0[1] = $3;
+  op[lastop].op.tetrahedron.d0[2] = $4;
+  op[lastop].op.tetrahedron.d0[3] = 0;
+  op[lastop].op.tetrahedron.d1[0] = $5;
+  op[lastop].op.tetrahedron.d1[1] = $6;
+  op[lastop].op.tetrahedron.d1[2] = $7;
+  op[lastop].op.tetrahedron.d1[3] = 0;
+  op[lastop].op.tetrahedron.d2[0] = $8;
+  op[lastop].op.tetrahedron.d2[1] = $9;
+  op[lastop].op.tetrahedron.d2[2] = $10;
+  op[lastop].op.tetrahedron.d2[3] = 0;
+  op[lastop].op.tetrahedron.d3[0] = $11;
+  op[lastop].op.tetrahedron.d3[1] = $12;
+  op[lastop].op.tetrahedron.d3[2] = $13;
+  op[lastop].op.tetrahedron.d3[3] = 0;
+
+  op[lastop].op.tetrahedron.constants = NULL;
+  op[lastop].op.tetrahedron.cs = NULL;
+  lastop++;
+}|
+
+TRIPRISM DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE
+{
+  lineno++;
+  op[lastop].opcode = TRIPRISM;
+  op[lastop].op.triprism.d0[0] = $2;
+  op[lastop].op.triprism.d0[1] = $3;
+  op[lastop].op.triprism.d0[2] = $4;
+  op[lastop].op.triprism.d0[3] = 0;
+  op[lastop].op.triprism.d1[0] = $5;
+  op[lastop].op.triprism.d1[1] = $6;
+  op[lastop].op.triprism.d1[2] = $7;
+  op[lastop].op.triprism.d1[3] = 0;
+  op[lastop].op.triprism.d2[0] = $8;
+  op[lastop].op.triprism.d2[1] = $9;
+  op[lastop].op.triprism.d2[2] = $10;
+  op[lastop].op.triprism.d2[3] = 0;
+  op[lastop].op.triprism.h = $11;
+
+  op[lastop].op.triprism.constants = NULL;
+  op[lastop].op.triprism.cs = NULL;
+  lastop++;
+}|
+
+CYLINDER DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE
+{
+  lineno++;
+  op[lastop].opcode = CYLINDER;
+  op[lastop].op.cylinder.d[0] = $2;
+  op[lastop].op.cylinder.d[1] = $3;
+  op[lastop].op.cylinder.d[2] = $4;
+  op[lastop].op.cylinder.d[3] = 0;
+  op[lastop].op.cylinder.r = $5;
+  op[lastop].op.cylinder.h = $6;
+  op[lastop].op.cylinder.constants = NULL;
+  op[lastop].op.cylinder.cs = NULL;
+
+  lastop++;
+}|
+
+CONE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE
+{
+  lineno++;
+  op[lastop].opcode = CONE;
+  op[lastop].op.cone.d[0] = $2;
+  op[lastop].op.cone.d[1] = $3;
+  op[lastop].op.cone.d[2] = $4;
+  op[lastop].op.cone.d[3] = 0;
+  op[lastop].op.cone.r = $5;
+  op[lastop].op.cone.h = $6;
+  op[lastop].op.cone.constants = NULL;
+  op[lastop].op.cone.cs = NULL;
+
+  lastop++;
+}|
+
+ELLIPSOID DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE DOUBLE
+{
+  lineno++;
+  op[lastop].opcode = ELLIPSOID;
+  op[lastop].op.ellipsoid.d[0] = $2;
+  op[lastop].op.ellipsoid.d[1] = $3;
+  op[lastop].op.ellipsoid.d[2] = $4;
+  op[lastop].op.ellipsoid.d[3] = 0;
+  op[lastop].op.ellipsoid.a = $5;
+	op[lastop].op.ellipsoid.b = $6;
+	op[lastop].op.ellipsoid.c = $7;
+  op[lastop].op.ellipsoid.constants = NULL;
+  op[lastop].op.ellipsoid.cs = NULL;
   lastop++;
 }|
 

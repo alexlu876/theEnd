@@ -87,6 +87,83 @@ void print_pcode()
 	    }
 
 	  break;
+		case TETRAHEDRON:
+		  printf("Tetrahedron: d0: %6.2f %6.2f %6.2f d1: %6.2f %6.2f %6.2f d2: %6.2f %6.2f %6.2f d3: %6.2f %6.2f %6.2f",
+			op[i].op.tetrahedron.d0[0],op[i].op.tetrahedron.d0[1],op[i].op.tetrahedron.d0[2],
+			op[i].op.tetrahedron.d1[0],op[i].op.tetrahedron.d1[1],op[i].op.tetrahedron.d1[2],
+			op[i].op.tetrahedron.d2[0],op[i].op.tetrahedron.d2[1],op[i].op.tetrahedron.d2[2],
+			op[i].op.tetrahedron.d3[0],op[i].op.tetrahedron.d3[1],op[i].op.tetrahedron.d3[2]);
+		  if (op[i].op.tetrahedron.constants != NULL)
+		    {
+		      printf("\tconstants: %s",op[i].op.tetrahedron.constants->name);
+		    }
+		  if (op[i].op.tetrahedron.cs != NULL)
+		    {
+		      printf("\tcs: %s",op[i].op.tetrahedron.cs->name);
+		    }
+
+		  break;
+			case TRIPRISM:
+			  printf("TriPrism: d0: %6.2f %6.2f %6.2f d1: %6.2f %6.2f %6.2f d2: %6.2f %6.2f %6.2f h=%6.2f",
+				op[i].op.triprism.d0[0],op[i].op.triprism.d0[1],op[i].op.triprism.d0[2],
+				op[i].op.triprism.d1[0],op[i].op.triprism.d1[1],op[i].op.triprism.d1[2],
+				op[i].op.triprism.d2[0],op[i].op.triprism.d2[1],op[i].op.triprism.d2[2],
+				op[i].op.triprism.h);
+			  if (op[i].op.triprism.constants != NULL)
+			    {
+			      printf("\tconstants: %s",op[i].op.triprism.constants->name);
+			    }
+			  if (op[i].op.triprism.cs != NULL)
+			    {
+			      printf("\tcs: %s",op[i].op.triprism.cs->name);
+			    }
+
+			  break;
+			case CYLINDER:
+			  printf("Cylinder: %6.2f %6.2f %6.2f r=%6.2f h=%6.2f",
+				 op[i].op.cylinder.d[0],op[i].op.cylinder.d[1],
+				 op[i].op.cylinder.d[2],
+				 op[i].op.cylinder.r,op[i].op.cylinder.h);
+			  if (op[i].op.cylinder.constants != NULL)
+			    {
+			      printf("\tconstants: %s",op[i].op.cylinder.constants->name);
+			    }
+			  if (op[i].op.cylinder.cs != NULL)
+			    {
+			      printf("\tcs: %s",op[i].op.cylinder.cs->name);
+			    }
+
+			  break;
+				case CONE:
+				  printf("Cone: %6.2f %6.2f %6.2f r=%6.2f h=%6.2f",
+					 op[i].op.cone.d[0],op[i].op.cone.d[1],
+					 op[i].op.cone.d[2],
+					 op[i].op.cone.r,op[i].op.cone.h);
+				  if (op[i].op.cone.constants != NULL)
+				    {
+				      printf("\tconstants: %s",op[i].op.cone.constants->name);
+				    }
+				  if (op[i].op.cone.cs != NULL)
+				    {
+				      printf("\tcs: %s",op[i].op.cone.cs->name);
+				    }
+
+				  break;
+					case ELLIPSOID:
+					  printf("Ellipsoid: %6.2f %6.2f %6.2f a=%6.2f b=%6.2f c=%6.2f",
+						 op[i].op.ellipsoid.d[0],op[i].op.ellipsoid.d[1],
+						 op[i].op.ellipsoid.d[2],
+						 op[i].op.ellipsoid.a,op[i].op.ellipsoid.b,op[i].op.ellipsoid.c);
+					  if (op[i].op.ellipsoid.constants != NULL)
+					    {
+					      printf("\tconstants: %s",op[i].op.ellipsoid.constants->name);
+					    }
+					  if (op[i].op.ellipsoid.cs != NULL)
+					    {
+					      printf("\tcs: %s",op[i].op.ellipsoid.cs->name);
+					    }
+
+					  break;
 	case LINE:
 	  printf("Line: from: %6.2f %6.2f %6.2f to: %6.2f %6.2f %6.2f",
 		 op[i].op.line.p0[0],op[i].op.line.p0[1],

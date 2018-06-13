@@ -336,6 +336,121 @@ void my_main() {
                       areflect, dreflect, sreflect);
         tmp->lastcol = 0;
         break;
+	      case TRIPRISM:
+ 
+	        if (op[i].op.triprism.constants != NULL)
+	          {
+	            //printf("\tconstants: %s",op[i].op.box.constants->name);
+	          }
+	        if (op[i].op.triprism.cs != NULL)
+	          {
+	            //printf("\tcs: %s",op[i].op.box.cs->name);
+	          }
+	        add_triprism(tmp,
+	                op[i].op.triprism.d0[0],op[i].op.triprism.d0[1],
+	                op[i].op.triprism.d0[2],
+	                op[i].op.triprism.d1[0],op[i].op.triprism.d1[1],
+	                op[i].op.triprism.d1[2],
+	                op[i].op.triprism.d2[0],op[i].op.triprism.d2[1],
+	                op[i].op.triprism.d2[2],
+									op[i].op.triprism.h);
+	        matrix_mult( peek(systems), tmp );
+	        draw_polygons(tmp, t, zb, view, light, ambient,
+	                      areflect, dreflect, sreflect);
+	        tmp->lastcol = 0;
+	        break;
+				
+				case TETRAHEDRON:
+				if (op[i].op.tetrahedron.constants != NULL){
+					//printf("\tconstants: %s",op[i].op.tetrahedron.constants->name);
+				}
+				if (op[i].op.tetrahedron.cs != NULL) {
+					//printf("\tcs: %s",op[i].op.tetrahedron.cs->name);
+				}
+				/*printf("Tetrahedron: d0: %6.2f %6.2f %6.2f d1: %6.2f %6.2f %6.2f d2: %6.2f %6.2f %6.2f d3: %6.2f %6.2f %6.2f", 
+					 op[i].op.tetrahedron.d0[0],op[i].op.tetrahedron.d0[1],
+				 	 op[i].op.tetrahedron.d0[2], 
+				 	 op[i].op.tetrahedron.d1[0],op[i].op.tetrahedron.d1[1], 
+				 	 op[i].op.tetrahedron.d1[2],
+				 	 op[i].op.tetrahedron.d2[0],op[i].op.tetrahedron.d2[1], 
+				 	 op[i].op.tetrahedron.d2[2],
+				 	 op[i].op.tetrahedron.d3[0],op[i].op.tetrahedron.d3[1], 
+				 	 op[i].op.tetrahedron.d3[2]);*/
+			  add_tetrahedron(tmp,op[i].op.tetrahedron.d0[0],op[i].op.tetrahedron.d0[1],
+				 	 op[i].op.tetrahedron.d0[2], 
+				 	 op[i].op.tetrahedron.d1[0],op[i].op.tetrahedron.d1[1], 
+				 	 op[i].op.tetrahedron.d1[2],
+				 	 op[i].op.tetrahedron.d2[0],op[i].op.tetrahedron.d2[1], 
+				 	 op[i].op.tetrahedron.d2[2],
+				 	 op[i].op.tetrahedron.d3[0],op[i].op.tetrahedron.d3[1], 
+				 	 op[i].op.tetrahedron.d3[2]);
+				matrix_mult( peek(systems), tmp );
+				draw_polygons(tmp, t, zb, view, light, ambient, areflect, dreflect, sreflect);
+				tmp->lastcol = 0;
+				break;
+				
+	      case CYLINDER:
+
+	        if (op[i].op.cylinder.constants != NULL)
+	          {
+	            //printf("\tconstants: %s",op[i].op.cylinder.constants->name);
+	          }
+	        if (op[i].op.cylinder.cs != NULL)
+	          {
+	            //printf("\tcs: %s",op[i].op.cylinder.cs->name);
+	          }
+	        add_cylinder(tmp,
+	                  op[i].op.cylinder.d[0],
+	                  op[i].op.cylinder.d[1],
+	                  op[i].op.cylinder.d[2],
+	                  op[i].op.cylinder.r,op[i].op.cylinder.h, step_3d);
+	        matrix_mult( peek(systems), tmp );
+	        draw_polygons(tmp, t, zb, view, light, ambient,
+	                      areflect, dreflect, sreflect);
+	        tmp->lastcol = 0;
+	        break;
+				
+		      case CONE:
+
+		        if (op[i].op.cone.constants != NULL)
+		          {
+		            //printf("\tconstants: %s",op[i].op.cylinder.constants->name);
+		          }
+		        if (op[i].op.cone.cs != NULL)
+		          {
+		            //printf("\tcs: %s",op[i].op.cylinder.cs->name);
+		          }
+		        add_cone(tmp,
+		                  op[i].op.cone.d[0],
+		                  op[i].op.cone.d[1],
+		                  op[i].op.cone.d[2],
+		                  op[i].op.cone.r,op[i].op.cone.h, step_3d);
+		        matrix_mult( peek(systems), tmp );
+		        draw_polygons(tmp, t, zb, view, light, ambient,
+		                      areflect, dreflect, sreflect);
+		        tmp->lastcol = 0;
+		        break;
+						
+			      case ELLIPSOID:
+
+			        if (op[i].op.ellipsoid.constants != NULL)
+			          {
+			            //printf("\tconstants: %s",op[i].op.sphere.constants->name);
+			          }
+			        if (op[i].op.ellipsoid.cs != NULL)
+			          {
+			            //printf("\tcs: %s",op[i].op.sphere.cs->name);
+			          }
+			        add_ellipsoid(tmp, op[i].op.ellipsoid.d[0],
+			                   op[i].op.ellipsoid.d[1],
+			                   op[i].op.ellipsoid.d[2],
+			                   op[i].op.ellipsoid.a, op[i].op.ellipsoid.b, op[i].op.ellipsoid.c,step_3d);
+			        matrix_mult( peek(systems), tmp );
+			        draw_polygons(tmp, t, zb, view, light, ambient,
+			                      areflect, dreflect, sreflect);
+			        tmp->lastcol = 0;
+			        break;
+				
       case LINE:
 
         if (op[i].op.line.constants != NULL)

@@ -26,6 +26,11 @@ ID [a-zA-Z][a-zA-Z0-9_]*
 "torus" { return TORUS;}
 "sphere" { return SPHERE;}
 "box" {return BOX;}
+"tetrahedron" {return TETRAHEDRON;}
+"cylinder" {return CYLINDER;}
+"cone" {return CONE;}
+"ellipsoid" {return ELLIPSOID;}
+"triprism" {return TRIPRISM;}
 "line" {return LINE;}
 "mesh" {return MESH;}
 "texture" {return TEXTURE;}
